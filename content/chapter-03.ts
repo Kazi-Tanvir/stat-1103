@@ -1509,6 +1509,304 @@ export const chapter03: Chapter = {
           result: "The jailer is WRONG. A's probability of execution remains exactly 1/3. This is identical to the Monty Hall problem.",
         }
       ]
+    },
+    {
+      id: "problem-31",
+      number: 31,
+      statement: "A total of 600 of the 1000 people in a retirement community classify themselves as Republicans, while the others classify themselves as Democrats. In a local election in which everyone voted, 60 Republicans voted for the Democratic candidate, and 50 Democrats voted for the Republican candidate. If a randomly chosen community member voted for the Republican, what is the probability that she or he is a Democrat?",
+      difficulty: "medium",
+      tags: ["conditional-probability", "bayes-formula"],
+      solved: true,
+      solution: [
+        {
+          stepNumber: 1,
+          title: "Define Probabilities",
+          explanation: "Let R_p and D_p be the event that a person is a Republican or Democrat. P(R_p) = 600/1000 = 0.6, P(D_p) = 400/1000 = 0.4.",
+        },
+        {
+          stepNumber: 2,
+          title: "Define Conditional Voting Probabilities",
+          explanation: "Let R_v be the event of voting for the Republican candidate. Out of 600 Republicans, 60 voted Democrat, so 540 voted Republican. Thus P(R_v|R_p) = 540/600 = 0.9. Out of 400 Democrats, 50 voted Republican, so P(R_v|D_p) = 50/400 = 0.125.",
+        },
+        {
+          stepNumber: 3,
+          title: "Apply Bayes' Formula",
+          explanation: "We want the probability that a person is a Democrat given they voted Republican, P(D_p | R_v).",
+          formula: "P(D_p|R_v) = \\frac{P(R_v|D_p)P(D_p)}{P(R_v|D_p)P(D_p) + P(R_v|R_p)P(R_p)}"
+        },
+        {
+          stepNumber: 4,
+          title: "Calculate the Result",
+          explanation: "Substitute the values into the formula.",
+          formula: "P(D_p|R_v) = \\frac{0.125 \\times 0.4}{0.125 \\times 0.4 + 0.9 \\times 0.6} = \\frac{0.05}{0.05 + 0.54} = \\frac{0.05}{0.59} = \\frac{5}{59}",
+          result: "The probability is 5/59 (approx 8.47%)."
+        }
+      ]
+    },
+    {
+      id: "problem-32",
+      number: 32,
+      statement: "Each of 2 balls is painted black or gold and then placed in an urn. Suppose that each ball is colored black with probability 1/2, and that these events are independent.",
+      subparts: [
+        { label: "a", text: "Suppose that you obtain information that the gold paint has been used (and thus at least one of the balls is painted gold). Compute the conditional probability that both balls are painted gold." },
+        { label: "b", text: "Suppose, now, that the urn tips over and 1 ball falls out. It is painted gold. What is the probability that both balls are gold in this case? Explain." }
+      ],
+      difficulty: "hard",
+      tags: ["conditional-probability"],
+      solved: true,
+      solution: [
+        {
+          stepNumber: 1,
+          title: "Part (a): At least one gold",
+          explanation: "The sample space for the colors of the two balls is {BB, BG, GB, GG}, each with probability 1/4. The event 'at least one gold' is {BG, GB, GG}.",
+          formula: "P(\\text{both gold} | \\text{at least one gold}) = \\frac{P(\\{GG\\})}{P(\\{BG, GB, GG\\})} = \\frac{1/4}{3/4} = \\frac{1}{3}"
+        },
+        {
+          stepNumber: 2,
+          title: "Part (b): A specific ball falls out",
+          explanation: "Let F_G be the event that the ball that falls out is gold. The urn could have 0, 1, or 2 gold balls. We want P(GG | F_G).",
+        },
+        {
+          stepNumber: 3,
+          title: "Calculate Probabilities for Part (b)",
+          explanation: "Using Bayes' Theorem: P(F_G) = P(F_G|BB)P(BB) + P(F_G|1G)P(1G) + P(F_G|GG)P(GG) = 0(1/4) + (1/2)(1/2) + 1(1/4) = 1/2.",
+          formula: "P(GG | F_G) = \\frac{P(F_G | GG)P(GG)}{P(F_G)} = \\frac{1 \\times (1/4)}{1/2} = \\frac{1}{2}"
+        },
+        {
+          stepNumber: 4,
+          title: "Explanation",
+          explanation: "Conclusion based on independence.",
+          result: "Knowing a specific ball (the one that fell out) is gold gives no information about the other independent ball, which still has a 1/2 chance of being gold."
+        }
+      ]
+    },
+    {
+      id: "problem-33",
+      number: 33,
+      statement: "Each of 2 cabinets identical in appearance has 2 drawers. Cabinet A contains a silver coin in each drawer, and cabinet B contains a silver coin in one of its drawers and a gold coin in the other. A cabinet is randomly selected, one of its drawers is opened, and a silver coin is found. What is the probability that there is a silver coin in the other drawer?",
+      difficulty: "medium",
+      tags: ["conditional-probability", "bayes-formula"],
+      solved: true,
+      solution: [
+        {
+          stepNumber: 1,
+          title: "Identify the Events",
+          explanation: "Let C_A be selecting Cabinet A (Silver/Silver) and C_B be selecting Cabinet B (Silver/Gold). P(C_A) = 1/2, P(C_B) = 1/2. Let S be the event a silver coin is observed.",
+        },
+        {
+          stepNumber: 2,
+          title: "Determine Likelihoods",
+          explanation: "If Cabinet A is selected, you are guaranteed to find a silver coin. If Cabinet B is selected, you have a 1/2 chance of picking the drawer with the silver coin.",
+          formula: "P(S|C_A) = 1, \\quad P(S|C_B) = 1/2"
+        },
+        {
+          stepNumber: 3,
+          title: "Apply Bayes' Formula",
+          explanation: "The other drawer has a silver coin if and only if we selected Cabinet A. We need P(C_A | S).",
+          formula: "P(C_A|S) = \\frac{P(S|C_A)P(C_A)}{P(S|C_A)P(C_A) + P(S|C_B)P(C_B)} = \\frac{1 \\times 1/2}{(1 \\times 1/2) + (1/2 \\times 1/2)} = \\frac{1/2}{3/4} = \\frac{2}{3}",
+          result: "The probability that the other drawer contains a silver coin is 2/3."
+        }
+      ]
+    },
+    {
+      id: "problem-34",
+      number: 34,
+      statement: "As an indicator of whether a male has prostate cancer, doctors perform a test measuring PSA levels. The probability that a noncancerous man will have an elevated PSA level is .135, and .268 if the man does have cancer.",
+      subparts: [
+        { label: "a", text: "If a physician is 70 percent certain that a male has prostate cancer, what is the conditional probability he has cancer given the test indicates an elevated PSA level?" },
+        { label: "b", text: "What if the test does not indicate an elevated PSA level?" },
+        { label: "c", text: "Repeat the preceding, assuming the physician initially believes there is a 30 percent chance the man has prostate cancer." }
+      ],
+      difficulty: "hard",
+      tags: ["conditional-probability", "bayes-formula"],
+      solved: true,
+      solution: [
+        {
+          stepNumber: 1,
+          title: "Define Probabilities",
+          explanation: "Let C = Has cancer, E = Elevated PSA. P(E|~C) = 0.135, P(E|C) = 0.268. P(~E|~C) = 0.865, P(~E|C) = 0.732.",
+        },
+        {
+          stepNumber: 2,
+          title: "Case 1: 70% Prior",
+          explanation: "Prior P(C) = 0.7, P(~C) = 0.3. \n(a) P(C|E) = (0.268 * 0.7) / [0.268 * 0.7 + 0.135 * 0.3] = 0.1876 / 0.2281 ≈ 0.8224 \n(b) P(C|~E) = (0.732 * 0.7) / [0.732 * 0.7 + 0.865 * 0.3] = 0.5124 / 0.7719 ≈ 0.6638",
+        },
+        {
+          stepNumber: 3,
+          title: "Case 2: 30% Prior",
+          explanation: "Prior P(C) = 0.3, P(~C) = 0.7. \n(a) P(C|E) = (0.268 * 0.3) / [0.268 * 0.3 + 0.135 * 0.7] = 0.0804 / 0.1749 ≈ 0.4597 \n(b) P(C|~E) = (0.732 * 0.3) / [0.732 * 0.3 + 0.865 * 0.7] = 0.2196 / 0.8251 ≈ 0.2661",
+          result: "Results show how strongly the prior belief affects the posterior probability, especially with an unreliable test."
+        }
+      ]
+    },
+    {
+      id: "problem-35",
+      number: 35,
+      statement: "An insurance company classifies people into good, average, and bad risks. Probabilities of an accident over a 1-year span are .05, .15, and .30 respectively. 20% are good risks, 50% are average, and 30% are bad.",
+      subparts: [
+        { label: "a", text: "What proportion of people have accidents in a fixed year?" },
+        { label: "b", text: "If policy holder A had no accidents, what is the probability that he or she is a good risk? An average risk?" }
+      ],
+      difficulty: "medium",
+      tags: ["conditional-probability", "law-of-total-probability", "bayes-formula"],
+      solved: true,
+      solution: [
+        {
+          stepNumber: 1,
+          title: "Part (a): Total Probability of Accident",
+          explanation: "Use the Law of Total Probability. P(Accident) = P(Acc|Good)P(Good) + P(Acc|Average)P(Average) + P(Acc|Bad)P(Bad).",
+          formula: "P(\\text{Accident}) = (0.05)(0.20) + (0.15)(0.50) + (0.30)(0.30) = 0.01 + 0.075 + 0.09 = 0.175",
+          result: "17.5% of people have accidents."
+        },
+        {
+          stepNumber: 2,
+          title: "Part (b): Probabilities given no accident",
+          explanation: "The probability of no accident is 1 - 0.175 = 0.825. We apply Bayes' formula for each risk class.",
+          formula: "P(\\text{Good}|\\text{No Acc}) = \\frac{P(\\text{No Acc}|\\text{Good})P(\\text{Good})}{P(\\text{No Acc})} = \\frac{(0.95)(0.20)}{0.825} \\approx 0.2303"
+        },
+        {
+          stepNumber: 3,
+          title: "Calculate for Average risk",
+          explanation: "Similarly for Average risk:",
+          formula: "P(\\text{Average}|\\text{No Acc}) = \\frac{P(\\text{No Acc}|\\text{Average})P(\\text{Average})}{P(\\text{No Acc})} = \\frac{(0.85)(0.50)}{0.825} \\approx 0.5152",
+          result: "Good risk: ~23%, Average risk: ~51.5%."
+        }
+      ]
+    },
+    {
+      id: "problem-42",
+      number: 42,
+      statement: "A gene pair XX or xX will have brown eyes, whereas xx will be blue-eyed. In a mating between organisms having genotypes aA, bB, cC, dD, eE and aa, bB, cc, Dd, ee, what is the probability that the progeny will (1) phenotypically, (2) genotypically resemble: a) the first parent, b) the second parent, c) either parent, d) neither parent?",
+      difficulty: "hard",
+      tags: ["independence", "genetics"],
+      solved: true,
+      solution: [
+        {
+          stepNumber: 1,
+          title: "Analyze Individual Genes",
+          explanation: "First Parent: Dominant phenotype for all 5. Genotype all heterozygous. \nSecond Parent: Recessive for A, C, E. Dominant for B, D. Genotype: aa, Bb, cc, Dd, ee. \nOffspring probabilities per gene: \nA: 1/2 Aa (Dom), 1/2 aa (Rec) \nB: 1/4 BB, 1/2 Bb, 1/4 bb (3/4 Dom, 1/4 Rec) \nC: 1/2 Cc (Dom), 1/2 cc (Rec) \nD: 1/4 DD, 1/2 Dd, 1/4 dd (3/4 Dom, 1/4 Rec) \nE: 1/2 Ee (Dom), 1/2 ee (Rec)",
+        },
+        {
+          stepNumber: 2,
+          title: "(1) Phenotypically",
+          explanation: "(a) Resemble 1st (all Dom): (1/2)(3/4)(1/2)(3/4)(1/2) = 9/128. \n(b) Resemble 2nd (Rec A,C,E; Dom B,D): (1/2)(3/4)(1/2)(3/4)(1/2) = 9/128. \n(c) Either: Since phenotypes are mutually exclusive, 9/128 + 9/128 = 18/128 = 9/64. \n(d) Neither: 1 - 9/64 = 55/64.",
+        },
+        {
+          stepNumber: 3,
+          title: "(2) Genotypically",
+          explanation: "(a) Resemble 1st (all heterozygous): (1/2)(1/2)(1/2)(1/2)(1/2) = 1/32. \n(b) Resemble 2nd (aa, Bb, cc, Dd, ee): (1/2)(1/2)(1/2)(1/2)(1/2) = 1/32. \n(c) Either: Mutually exclusive, so 1/32 + 1/32 = 1/16. \n(d) Neither: 1 - 1/16 = 15/16.",
+        }
+      ]
+    },
+    {
+      id: "problem-44",
+      number: 44,
+      statement: "Although both my parents have brown eyes, I have blue eyes. What is the probability that my sister has blue eyes? (An individual who receives a blue-eyed gene from each parent will have blue eyes, whereas one who receives one blue-eyed and one brown-eyed gene will have brown eyes.)",
+      difficulty: "easy",
+      tags: ["independence", "genetics"],
+      solved: true,
+      solution: [
+        {
+          stepNumber: 1,
+          title: "Determine Parents' Genotypes",
+          explanation: "Blue eyes is a recessive trait (bb), while brown eyes is dominant (B_). Since both parents have brown eyes but produced a blue-eyed child, both parents MUST carry the blue-eyed gene. Therefore, both parents have the genotype Bb.",
+        },
+        {
+          stepNumber: 2,
+          title: "Calculate Sister's Probability",
+          explanation: "The sister inherits one gene from each heterozygous (Bb) parent independently.",
+          formula: "P(\\text{sister is } bb) = P(\\text{b from mother}) \\times P(\\text{b from father}) = \\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4}",
+          result: "There is a 25% (1/4) chance that the sister has blue eyes."
+        }
+      ]
+    },
+    {
+      id: "problem-45",
+      number: 45,
+      statement: "In a 7-game series played with two teams, the first team to win a total of 4 games is the winner. Suppose that each game played is independently won by team A with probability p.",
+      subparts: [
+        { label: "a", text: "Given that one team leads 3 to 0, what is the probability that it is team A that is leading?" },
+        { label: "b", text: "Given that one team leads 3 to 0, what is the probability that team wins the series?" },
+        { label: "c", text: "If p = 1/2, what is the probability that the team that wins the first game wins the series?" }
+      ],
+      difficulty: "hard",
+      tags: ["conditional-probability", "independence"],
+      solved: true,
+      solution: [
+        {
+          stepNumber: 1,
+          title: "Part (a): Team A leads given a 3-0 lead",
+          explanation: "Let q = 1-p. The probability A leads 3-0 is p^3, and B leads 3-0 is q^3. The probability someone leads 3-0 is p^3 + q^3.",
+          formula: "P(\\text{A leads} | \\text{someone leads}) = \\frac{p^3}{p^3 + q^3}"
+        },
+        {
+          stepNumber: 2,
+          title: "Part (b): Leading team wins series",
+          explanation: "If a team leads 3-0, they win the series if they win at least 1 of the remaining 4 games (probability 1 - prob they lose all 4). For A, this is 1 - q^4. For B, it is 1 - p^4.",
+          formula: "P(\\text{Leading wins}) = \\frac{(1-q^4)p^3 + (1-p^4)q^3}{p^3 + q^3} = 1 - \\frac{p^3 q^3(p+q)}{p^3 + q^3} = 1 - \\frac{p^3 q^3}{p^3 + q^3}"
+        },
+        {
+          stepNumber: 3,
+          title: "Part (c): G1 Winner Wins Series (p=1/2)",
+          explanation: "By symmetry, P(A wins series | A wins G1) = P(B wins series | B wins G1). So we just need P(A wins series | A wins G1). A needs 3 more wins in max 6 games. This is equivalent to A winning at least 3 out of exactly 6 games.",
+          formula: "P(\\text{A wins } \\ge 3 \\text{ of 6}) = \\sum_{k=3}^6 \\binom{6}{k} \\left(\\frac{1}{2}\\right)^6 = \\frac{20 + 15 + 6 + 1}{64} = \\frac{42}{64} = \\frac{21}{32}",
+          result: "The probability is 21/32."
+        }
+      ]
+    },
+    {
+      id: "problem-50",
+      number: 50,
+      statement: "There is a 60 percent chance that the event A will occur. If A does not occur, there is a 10 percent chance that B will occur. What is the probability that at least one of the events A or B occur?",
+      difficulty: "easy",
+      tags: ["axioms-of-probability", "conditional-probability"],
+      solved: true,
+      solution: [
+        {
+          stepNumber: 1,
+          title: "Identify Given Information",
+          explanation: "We are given P(A) = 0.60 and the conditional probability P(B|A^c) = 0.10.",
+        },
+        {
+          stepNumber: 2,
+          title: "Calculate P(at least one)",
+          explanation: "The event 'at least one occurs' is A ∪ B. We can partition this union into two mutually exclusive events: A occurs, OR A does not occur but B occurs.",
+          formula: "P(A \\cup B) = P(A) + P(B \\cap A^c)"
+        },
+        {
+          stepNumber: 3,
+          title: "Apply Multiplication Rule",
+          explanation: "We know P(B ∩ A^c) = P(B|A^c)P(A^c). Since P(A) = 0.60, P(A^c) = 0.40.",
+          formula: "P(A \\cup B) = 0.60 + (0.10 \\times 0.40) = 0.60 + 0.04 = 0.64",
+          result: "There is a 64% chance that at least one event occurs."
+        }
+      ]
+    },
+    {
+      id: "problem-51",
+      number: 51,
+      statement: "Suppose distinct values are written on each of three cards, which are then randomly given the designations A, B, and C. The values on cards A and B are then compared. What is the probability that the smaller of these values is also smaller than the value on card C?",
+      difficulty: "medium",
+      tags: ["sample-space", "counting"],
+      solved: true,
+      solution: [
+        {
+          stepNumber: 1,
+          title: "Understand the Condition",
+          explanation: "Let the values be v1 < v2 < v3. The problem asks for the probability that min(A, B) < C. This condition is exactly equivalent to saying that the absolute smallest card (v1) must be either card A or card B.",
+        },
+        {
+          stepNumber: 2,
+          title: "Analyze Symmetry",
+          explanation: "The cards A, B, and C are randomly assigned the 3 values. By symmetry, the absolute smallest value (v1) is equally likely to be assigned to A, B, or C.",
+        },
+        {
+          stepNumber: 3,
+          title: "Calculate Probability",
+          explanation: "Since the smallest value has a 1/3 chance of being A, 1/3 chance of being B, and 1/3 chance of being C, the probability that it is either A or B is 1/3 + 1/3 = 2/3.",
+          result: "The probability is 2/3."
+        }
+      ]
     }
   ],
 };
